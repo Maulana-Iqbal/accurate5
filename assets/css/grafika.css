@@ -1,0 +1,50 @@
+.card-redirect {
+  height: 150px;
+}
+
+.card-redirect-img {
+  display: block;
+  margin: 0 auto;
+  height: 70px;
+}
+
+.card-redirect-link {
+  text-decoration: none;
+  color: #858796;
+}
+
+.card-redirect-link:hover {
+  text-decoration: none;
+  color: #192A56;
+}
+
+.input-error {
+  background-color: rgba(255, 172, 169, 0.2);
+}
+
+.edit-column i {
+  font-size: 1.3rem;
+  color: #3498DB;
+}
+
+.edit-column a:hover {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+tbody.no-style tr:nth-child(even) {
+  background-color: #fff;
+}
+
+tbody.no-style tr {
+  font-size: 15px;
+  color: #808080;
+  line-height: 1.2;
+  font-weight: unset;
+}
+
+tbody.no-style tr:hover {
+  color: #808080;
+  background-color: #fff;
+  cursor: context-menu;
+}
