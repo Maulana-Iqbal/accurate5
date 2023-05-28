@@ -163,13 +163,14 @@ class Pengguna extends CI_Controller
 
   public function editDivisi($divisi_id = 0)
   {
-    if ($divisi_id == 0)
+    if ($divisi_id == 0) {
       redirect('Daftar/Pengguna');
-
+    }
+  
     if (!empty($_POST)) {
       var_dump($_POST);
       $nama_divisi_dari_return = $this->Pengguna_model->editDivisi($divisi_id);
-      $this->session->set_flashdata('suksesUpdateDivisi', '<div class="alert alert-success alert-dismissible fade show mt-4 mb-4" role="alert" style="margin: 0;font-size: 1.2rem">Divisi ' . $nama_divisi_dari_return . ' berhasil di update!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
+      $this->session->set_flashdata('suksesUpdateDivisi', '<div class="alert alert-success alert-dismissible fade show mt-4 mb-4" role="alert" style="margin: 0;font-size: 1.2rem">Divisi ' . $nama_divisi_dari_return . ' berhasil diupdate!<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>');
       redirect('Daftar/Pengguna');
     } else {
       $data['divisi_id'] = $divisi_id;
@@ -181,19 +182,20 @@ class Pengguna extends CI_Controller
       $data['nama_divisi'] = $this->Pengguna_model->getNamaDivisiById($divisi_id);
       $data['hak_akses_menu'] = $this->Pengguna_model->getHakAksesDivisiForMenuById($divisi_id);
       $data['hak_akses_fitur'] = $this->Pengguna_model->getHakAksesDivisiForFiturById($divisi_id);
-
+  
       $data['title'] = "Daftar | Pengguna";
       $this->load->view('templates/header', $data);
       $this->load->view('templates/sidebar');
       $this->load->view('templates/topbar');
-      $this->load->view('daftar/pengguna/editDivisi');
-      // if ($this->AksesKontrol_model->cekHakAksesFitur())
-      //   $this->load->view('daftar/pengguna/editDivisi');
-      // else
-      //   $this->load->view('templates/error_hak_akses');
+      if ($this->AksesKontrol_model->cekHakAksesFitur()) {
+        $this->load->view('daftar/pengguna/editDivisi');
+      } else {
+        $this->load->view('templates/error_hak_akses');
+      }
       $this->load->view('templates/footer');
     }
   }
+  
 
   public function hapusDivisi($divisi_id = 0)
   {

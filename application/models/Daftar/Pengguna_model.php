@@ -304,17 +304,24 @@ class Pengguna_model extends CI_Model
   }
 
   private function _getHakAksesMenuIdForUpdate($divisi_id, $html_id_menu)
-  {
-    $sql = "
-      SELECT um.html_id_menu, uh.id AS hak_id, uh.divisi_id, uh.is_enabled
-      FROM utility_menu um
-      JOIN utility_hak_akses_menu uh
-        ON um.id = uh.utility_menu_id
-      WHERE uh.divisi_id = $divisi_id AND um.html_id_menu = '$html_id_menu'
-      LIMIT 1
-    ";
-    return $this->db->query($sql)->row_array()['hak_id'];
+{
+  $sql = "
+    SELECT um.html_id_menu, uh.id AS hak_id, uh.divisi_id, uh.is_enabled
+    FROM utility_menu um
+    JOIN utility_hak_akses_menu uh
+      ON um.id = uh.utility_menu_id
+    WHERE uh.divisi_id = $divisi_id AND um.html_id_menu = '$html_id_menu'
+    LIMIT 1
+  ";
+  $result = $this->db->query($sql)->row_array();
+
+  if ($result !== null && array_key_exists('hak_id', $result)) {
+    return $result['hak_id'];
   }
+
+  return null;
+}
+
 
   private function _updateHakAksesMenu($divisi_id)
   {
